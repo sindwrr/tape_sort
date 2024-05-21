@@ -1,37 +1,48 @@
 #include "FileTape.h"
 #include "TapeSort.h"
+#include "assert.h"
 
 #include <iostream>
 
+#define MEM_LIMIT 1024
+
 int main(int argc, char* argv[]) 
 {
+    tests(); // юнит-тесты
+
     if (argc != 4) 
     {
-        std::cerr << "Wrong input format" << std::endl;
+        std::cerr << "Ошибка: Неверное кол-во аргументов" << std::endl;
         return 1;
     }
     
-    std::string inputFileName = argv[1];
-    std::string outputFileName = argv[2];
-    std::string configFileName = argv[3];
+    // считываем имена файлов из аргументов
+    std::string input_file = argv[1];
+    std::string output_file = argv[2];
+    std::string config_file = argv[3];
 
     try 
     {
-        
-        FileTape inputTape(inputFileName);
-        
-        inputTape.configure(configFileName);
+        // инициализация и конфигурация лент
+        FileTape input_tape(input_file);
+        input_tape.configure(config_file);
 
-        FileTape outputTape(outputFileName);
-        size_t memoryLimit = 1024 * 1024;
+        FileTape output_tape(output_file);
+        output_tape.configure(config_file);
+
+        // непосредственно сортировка
+        size_t mem_limit = MEM_LIMIT;
         TapeSort sorter;
-        
-        sorter.sort(inputTape, outputTape, memoryLimit);
+
+        std::cout << "Сортировка началась. Пожалуйста, подождите...\n";
+        sorter.sort(input_tape, output_tape, mem_limit);
+        std::cout << "Сортировка завершена! См. выходной файл.\n";     
     } 
     catch (const std::exception& e) 
     {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        std::cerr << "Исключение: " << e.what() << std::endl;
         return 1;
     }
+
     return 0;
 }

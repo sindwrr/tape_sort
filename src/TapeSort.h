@@ -1,14 +1,13 @@
-#ifndef TAPESORT_H
-#define TAPESORT_H
+#ifndef TAPE_SORT_H
+#define TAPE_SORT_H
 
 #include "TapeInterface.h"
 
-#include <string>
-
+// класс для алгоритма сортировки
 class TapeSort 
 {
 public:
-    void sort(TapeInterface& inputTape, TapeInterface& outputTape, size_t memoryLimit);
+    void sort(TapeInterface&, TapeInterface&, size_t);
 };
 
-#endif // TAPESORT_H
+#endif // TAPE_SORT_H

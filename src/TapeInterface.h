@@ -1,8 +1,9 @@
-#ifndef TAPEINTERFACE_H
-#define TAPEINTERFACE_H
+#ifndef TAPE_INTERFACE_H
+#define TAPE_INTERFACE_H
 
 #include <string>
 
+// интерфейс для работы с лентой
 class TapeInterface 
 {
 public:
@@ -16,4 +17,4 @@ public:
     virtual void configure(const std::string&) = 0;
 };
 
-#endif // TAPEINTERFACE_H
+#endif // TAPE_INTERFACE_H

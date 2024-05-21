@@ -1,5 +1,5 @@
-#ifndef FILETAPE_H
-#define FILETAPE_H
+#ifndef FILE_TAPE_H
+#define FILE_TAPE_H
 
 #include "TapeInterface.h"
 
@@ -8,31 +8,31 @@
 #include <chrono>
 #include <thread>
 
+// класс (реализация интерфейса) для работы с лентой 
 class FileTape : public TapeInterface 
 {
 private:
-    std::fstream file;
-    std::string fileName;
-    std::vector<int> tapeData;
+    std::string filename;
+    std::vector<int> tape_data;
     size_t position;
-    int readDelay;
-    int writeDelay;
-    int rewindDelay;
-    int moveDelay;
+    int read_delay;
+    int write_delay;
+    int rewind_delay;
+    int move_delay;
 
     void loadTape();
     void saveTape();
 
 public:
-    FileTape(const std::string& fileName);
+    FileTape(const std::string&);
     ~FileTape();
 
-    void write(int value) override;
+    void write(int) override;
     int read() override;
     void rewind() override;
     void forward() override;
     void backward() override;
-    void configure(const std::string& configPath) override;
+    void configure(const std::string&) override;
 };
 
-#endif // FILETAPE_H
+#endif // FILE_TAPE_H
